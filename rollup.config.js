@@ -1,3 +1,4 @@
+import { sass } from 'svelte-preprocess-sass';
 import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
@@ -22,7 +23,12 @@ export default {
 			// a separate file — better for performance
 			css: css => {
 				css.write('public/bundle.css');
-			}
+            },
+            preprocess: {
+                style: sass({
+                    includePaths: ['node_modules', '@svelte-material-ui']
+                })
+            }
 		}),
 
 		// If you have external dependencies installed from
